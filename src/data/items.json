@@ -1,0 +1,18 @@
+[
+  {
+    "id": 0,
+    "name": "iron",
+    "category": "material",
+    "price": 20.5,
+    "stock": 105,
+    "minimumStock": 5
+  },
+  {
+    "id": 1,
+    "name": "plastic",
+    "category": "material",
+    "price": 10.4,
+    "stock": 15,
+    "minimumStock": 5
+  }
+]

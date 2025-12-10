@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "name": "pan",
+    "requiredItems": [
+      {
+        "item": "iron",
+        "quantity": 5
+      },
+      {
+        "item": "copper",
+        "quantity": 2
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "plastic cup",
+    "requiredItems": [
+      {
+        "item": "plastic",
+        "quantity": 5
+      }
+    ]
+  }
+]
