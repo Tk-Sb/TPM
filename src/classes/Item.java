@@ -18,4 +18,8 @@ public class Item {
         this.stock = stock;
         this.minimumStock= minimumStock;
     }
+
+    public int getId () {
+        return id;
+    }
 }

@@ -4,7 +4,7 @@
     "name": "iron",
     "category": "material",
     "price": 20.5,
-    "stock": 105,
+    "stock": 10,
     "minimumStock": 5
   },
   {
@@ -12,7 +12,7 @@
     "name": "plastic",
     "category": "material",
     "price": 10.4,
-    "stock": 15,
+    "stock": 10,
     "minimumStock": 5
   }
 ]

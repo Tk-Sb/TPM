@@ -8,8 +8,8 @@
         "quantity": 5
       },
       {
-        "item": "copper",
-        "quantity": 2
+        "item": "plastic",
+        "quantity": 5
       }
     ]
   },
@@ -19,7 +19,7 @@
     "requiredItems": [
       {
         "item": "plastic",
-        "quantity": 5
+        "quantity": 2
       }
     ]
   }

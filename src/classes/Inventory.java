@@ -13,6 +13,8 @@ public class Inventory {
     public List<Product> products = new ArrayList<>();
     private final String itemsFilePath;
     private final String productsFilePath;
+    public int productMaxId;
+    public int itemMaxId;
 
     // Constructor with file paths
     public Inventory(String itemsFilePath, String productsFilePath) {
@@ -26,6 +28,7 @@ public class Inventory {
         if (file.exists()) {
             items = mapper.readValueAsList(file, Item.class);
             System.out.println("Loaded " + items.size() + " items from: " + itemsFilePath);
+            itemMaxId = findItemsMaxId();
         } else {
             System.out.println("Items file not found: " + itemsFilePath + ". Starting with empty inventory.");
             items = new ArrayList<>();
@@ -38,6 +41,7 @@ public class Inventory {
         if (file.exists()) {
             products = mapper.readValueAsList(file, Product.class);
             System.out.println("Loaded " + products.size() + " products from: " + productsFilePath);
+            productMaxId = findProductsMaxId();
         } else {
             System.out.println("Products file not found: " + productsFilePath + ". Starting with empty inventory.");
             products = new ArrayList<>();
@@ -48,16 +52,6 @@ public class Inventory {
     public void loadAll() throws JSONException {
         loadItems();
         loadProducts();
-    }
-
-    // Get item by ID
-    public Item getItemById(int id) {
-        for (Item item : items) {
-            if (item.id == id) {
-                return item;
-            }
-        }
-        return null;
     }
 
     // Add item and save to file
@@ -112,6 +106,26 @@ public class Inventory {
         saveProducts();
     }
 
+    // Find item by ID
+    public Item findItemById(int id) {
+        for (Item item : items) {
+            if (item.id == id) {
+                return item;
+            }
+        }
+        return null;
+    }
+
+    // Find item by name
+    public Item findItemByName(String name) {
+        for (Item item : items) {
+            if (item.name != null && item.name.equalsIgnoreCase(name)) {
+                return item;
+            }
+        }
+        return null;
+    }
+
     // Find items by category
     public List<Item> findItemsByCategory(String category) {
         List<Item> result = new ArrayList<>();
@@ -123,20 +137,20 @@ public class Inventory {
         return result;
     }
 
-    // Find product by name
-    public Product findProductByName(String name) {
+    // Find product by ID
+    public Product findProductById(int id) {
         for (Product product : products) {
-            if (product.name != null && product.name.equalsIgnoreCase(name)) {
+            if (product.id == id) {
                 return product;
             }
         }
         return null;
     }
 
-    // Find product by ID
-    public Product findProductById(int id) {
+    // Find product by name
+    public Product findProductByName(String name) {
         for (Product product : products) {
-            if (product.id == id) {
+            if (product.name != null && product.name.equalsIgnoreCase(name)) {
                 return product;
             }
         }
@@ -178,7 +192,7 @@ public class Inventory {
 
     // Check if an item ID already exists
     public boolean itemIdExists(int id) {
-        return getItemById(id) != null;
+        return findItemById(id) != null;
     }
 
     // Check if a product ID already exists
@@ -210,5 +224,43 @@ public class Inventory {
             }
         }
         System.out.println("Product with ID " + updatedProduct.id + " not found for update.");
+    }
+
+    // Find the max id value for auto generating new ids
+    private int findProductsMaxId() {
+        return products.stream()
+                .mapToInt(Product::getId)
+                .max()
+                .orElse(0); // Default value if list is empty
+    }
+
+    // Find the max id value for auto generating new ids
+    private int findItemsMaxId() {
+        return items.stream()
+                .mapToInt(Item::getId)
+                .max()
+                .orElse(0); // Default value if list is empty
+    }
+
+    // Check for required items to produce a product
+    public boolean canProduce(Product product, int quantity) {
+        for (Product.RequiredItem requiredItem : findProductByName(product.name).requiredItems) {
+            if ((requiredItem.quantity * quantity) > findItemByName(requiredItem.item).stock) {
+                System.out.println("not enough " + requiredItem.item);
+                return false;
+            }
+        }
+        return true;
+    }
+    public boolean canProduce(String productName, int quantity) {
+
+        for (Product.RequiredItem requiredItem : findProductByName(productName).requiredItems) {
+            System.out.println(requiredItem.item + ": " + requiredItem.quantity);
+            if ((requiredItem.quantity * quantity) > findItemByName(requiredItem.item).stock) {
+                System.out.println("not enough " + requiredItem.item);
+                return false;
+            }
+        }
+        return true;
     }
 }
