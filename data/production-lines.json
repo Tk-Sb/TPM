@@ -1,0 +1,19 @@
+[
+  {
+    "id": 0,
+    "name": "pans maker",
+    "state": "",
+    "tasks": [
+      {
+        "id": 0,
+        "product": "pan",
+        "quantity": 10,
+        "customer": "abo abdo",
+        "startingDate": "",
+        "finishingDate": "",
+        "state": "",
+        "progress": 20.5
+      }
+    ]
+  }
+]
