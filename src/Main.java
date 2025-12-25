@@ -8,10 +8,11 @@ public class Main {
         return inventory;
     }
     public static void main(String[] args) {
-        inventory = new Inventory("data/items.json", "data/products.json");
+        inventory = new Inventory("data/items.json", "data/products.json", "data/production-lines.json");
 
         try {
             inventory.loadAll();
+            inventory.printSummary();
         } catch (JSONException e) {
             System.out.println(e.getMessage());
         }
@@ -21,7 +22,7 @@ public class Main {
         ProductionLine productionLine1 = new ProductionLine("pans production line");
 
         productionLine1.addTask(new ProductionLine.Task(
-            inventory.findProductByName("pan"),
+            "pan",
             2,
             "pep",
             "21/12/2026",

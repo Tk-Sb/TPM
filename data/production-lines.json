@@ -6,7 +6,7 @@
     "tasks": [
       {
         "id": 0,
-        "product": "pan",
+        "productName": "pan",
         "quantity": 10,
         "customer": "abo abdo",
         "startingDate": "",
