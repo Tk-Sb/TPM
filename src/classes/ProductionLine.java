@@ -9,6 +9,8 @@ public class ProductionLine {
     public String state; // active - inactive - maintenance
     public List<Task> tasks = new ArrayList<>();
 
+    public ProductionLine(){}
+
     public ProductionLine (String name) {
         this.id = 0;
         this.name = name;
@@ -23,7 +25,7 @@ public class ProductionLine {
 
     public static class Task {
         public int id;
-        public Product product;
+        public String productName;
         public int quantity;
         public String customer;
         public String startingDate;
@@ -31,9 +33,11 @@ public class ProductionLine {
         public String state; // ongoing - completed - canceled
         public double progress;
 
-        public Task (Product product, int quantity, String customer, String startingDate, String finishingDate, boolean canProduce) {
+        public  Task(){}
+
+        public Task (String productName, int quantity, String customer, String startingDate, String finishingDate, boolean canProduce) {
             this.id = 0;
-            this.product = product;
+            this.productName = productName;
             this.quantity = quantity;
             this.customer = customer;
             this.startingDate = startingDate;
