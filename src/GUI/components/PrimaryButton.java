@@ -14,9 +14,19 @@ public class PrimaryButton extends JButton {
     private final Color pressedBackground = new Color(91, 24, 184);
     private final Color textColor = Color.WHITE;
     private final int borderRadius = 16;
+    private int paddingX = 32;
+    private int paddingY = 20;
+
 
     public PrimaryButton(String text, ActionListener onClick) {
         super(text);
+        initializeButton(onClick);
+    }
+
+    public PrimaryButton(String text, int px, int py, ActionListener onClick) {
+        super(text);
+        paddingX = px;
+        paddingY = py;
         initializeButton(onClick);
     }
 
@@ -30,7 +40,7 @@ public class PrimaryButton extends JButton {
         setFocusPainted(false); // remove focus state
         setContentAreaFilled(false);
         setOpaque(false); // opacity
-        setBorder(new EmptyBorder(15, 200, 10, 200)); // padding around the text
+        setBorder(new EmptyBorder(paddingY, paddingX, paddingY - 8, paddingX)); // padding around the text
 
         // Add on-click listener
         addActionListener(onClick);

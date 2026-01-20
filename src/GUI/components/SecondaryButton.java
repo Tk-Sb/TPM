@@ -14,9 +14,18 @@ public class SecondaryButton extends JButton {
     private final Color pressedBackground = new Color(67, 67, 69);
     private final Color textColor = Color.WHITE;
     private final int borderRadius = 16;
+    private int paddingX = 32;
+    private int paddingY = 20;
 
     public SecondaryButton(String text, ActionListener onClick) {
         super(text);
+        initializeButton(onClick);
+    }
+
+    public SecondaryButton(String text, int px, int py, ActionListener onClick) {
+        super(text);
+        paddingX = px;
+        paddingY = py;
         initializeButton(onClick);
     }
 
@@ -30,7 +39,7 @@ public class SecondaryButton extends JButton {
         setFocusPainted(false); // remove focus state
         setContentAreaFilled(false);
         setOpaque(false); // opacity
-        setBorder(new EmptyBorder(15, 200, 10, 200)); // padding around the text
+        setBorder(new EmptyBorder(paddingY, paddingX, paddingY - 8, paddingX)); // padding around the text
 
         // Add on-click listener
         addActionListener(onClick);

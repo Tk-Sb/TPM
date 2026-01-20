@@ -28,7 +28,7 @@ public class LoginPage extends JFrame {
         password.setValidator(new RequiredValidator());
         password.setValidator(new PasswordValidator());
 
-        PrimaryButton primaryButton = new PrimaryButton("Login", e -> {
+        PrimaryButton primaryButton = new PrimaryButton("Login", 200, 20, e -> {
             if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
                 if (username.getText().equals("admin@gmail.com") && password.getText().equals("admin123")) {
                     dispose();
@@ -39,7 +39,7 @@ public class LoginPage extends JFrame {
             }
         });
 
-        SecondaryButton secondaryButton = new SecondaryButton("Reset", e -> {
+        SecondaryButton secondaryButton = new SecondaryButton("Reset", 200, 20, e -> {
             username.setText("");
             password.setText("");
         });

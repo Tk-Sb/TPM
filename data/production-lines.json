@@ -2,11 +2,55 @@
   {
     "id": 0,
     "name": "pans maker",
-    "state": "",
+    "state": "active",
     "tasks": [
       {
         "id": 0,
         "productName": "pan",
+        "quantity": 10,
+        "customer": "abo abdo",
+        "startingDate": "",
+        "finishingDate": "",
+        "state": "",
+        "progress": 20.5
+      },
+      {
+        "id": 1,
+        "productName": "steel pan",
+        "quantity": 10,
+        "customer": "abo abdo",
+        "startingDate": "",
+        "finishingDate": "",
+        "state": "",
+        "progress": 20.5
+      }
+    ]
+  },
+  {
+    "id": 1,
+    "name": "cups maker",
+    "state": "active",
+    "tasks": [
+      {
+        "id": 0,
+        "productName": "plastic cup",
+        "quantity": 10,
+        "customer": "abo abdo",
+        "startingDate": "",
+        "finishingDate": "",
+        "state": "",
+        "progress": 20.5
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "tires maker",
+    "state": "active",
+    "tasks": [
+      {
+        "id": 0,
+        "productName": "rubber tire",
         "quantity": 10,
         "customer": "abo abdo",
         "startingDate": "",
