@@ -3,15 +3,13 @@ package GUI.components;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 
 public class Dialog extends JPanel {
     // Colors and style
     private final Color background = new Color(24, 24, 27);
     private final Color borderColor = new Color(47, 47, 50);
     private final Color overlayColor = new Color(0, 0, 0, 128); // Semi-transparent overlay
-    private final int borderRadius = 16;
+    private final int borderRadius = 0;
     private final int borderThickness = 1;
 
     // Content panel
@@ -19,13 +17,16 @@ public class Dialog extends JPanel {
     private JPanel headerPanel;
     private JPanel footerPanel;
     private JLabel titleLabel;
-    private JButton closeButton;
 
     // Container references
     private JDialog dialog;
     private JPanel overlayPanel;
     private boolean isModal = true;
     private boolean showOverlay = true;
+
+    public Dialog() {
+        initializeDialog();
+    }
 
     public Dialog(String title) {
         initializeDialog();
@@ -75,10 +76,7 @@ public class Dialog extends JPanel {
         titleLabel.setFont(new Font("Segoe UI", Font.BOLD, 18));
         titleLabel.setForeground(Color.WHITE);
 
-        closeButton = createCloseButton(); // Creates the x close button
-
         headerPanel.add(titleLabel, BorderLayout.WEST);
-        headerPanel.add(closeButton, BorderLayout.EAST);
 
         // Content panel
         contentPanel = new JPanel();
@@ -132,32 +130,6 @@ public class Dialog extends JPanel {
         container.setBorder(new EmptyBorder(1, 1, 1, 1));
         container.add(this, BorderLayout.CENTER);
         return container;
-    }
-
-    private JButton createCloseButton() {
-        JButton button = new JButton("×");
-        button.setFont(new Font("Segoe UI", Font.BOLD, 20));
-        button.setForeground(new Color(150, 150, 150));
-        button.setBackground(new Color(0, 0, 0, 0));
-        button.setBorder(BorderFactory.createEmptyBorder(4, 8, 4, 8));
-        button.setFocusPainted(false);
-        button.setContentAreaFilled(false);
-        button.setCursor(new Cursor(Cursor.HAND_CURSOR));
-
-        button.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseEntered(MouseEvent e) {
-                button.setForeground(Color.WHITE);
-            }
-
-            @Override
-            public void mouseExited(MouseEvent e) {
-                button.setForeground(new Color(150, 150, 150));
-            }
-        });
-
-        button.addActionListener(e -> hide());
-        return button;
     }
 
     // Show methods

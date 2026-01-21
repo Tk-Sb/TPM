@@ -7,14 +7,16 @@ public class ProductionLine {
     public int id;
     public String name;
     public String state; // active - inactive - maintenance
+    public String notes;
     public List<Task> tasks = new ArrayList<>();
 
     public ProductionLine(){}
 
-    public ProductionLine (String name) {
-        this.id = 0;
+    public ProductionLine (int id, String name, String state, String notes) {
+        this.id = id;
         this.name = name;
-        this.state = "inactive";
+        this.state = state;
+        this.notes = notes;
         this.tasks = new ArrayList<>();
     }
 
@@ -47,10 +49,6 @@ public class ProductionLine {
             } else {
                 this.state = "not enough items to start task";
             }
-        }
-
-        public void printState () {
-            System.out.println(state);
         }
     }
 

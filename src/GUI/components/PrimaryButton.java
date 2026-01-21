@@ -23,6 +23,11 @@ public class PrimaryButton extends JButton {
         initializeButton(onClick);
     }
 
+    public PrimaryButton(String text) {
+        super(text);
+        initializeButton(e -> {});
+    }
+
     public PrimaryButton(String text, int px, int py, ActionListener onClick) {
         super(text);
         paddingX = px;

@@ -3,6 +3,7 @@
     "id": 0,
     "name": "pans maker",
     "state": "active",
+    "notes": "note about this and that",
     "tasks": [
       {
         "id": 0,
@@ -30,6 +31,7 @@
     "id": 1,
     "name": "cups maker",
     "state": "active",
+    "notes": "note about game dev",
     "tasks": [
       {
         "id": 0,
@@ -47,14 +49,15 @@
     "id": 2,
     "name": "tires maker",
     "state": "active",
+    "notes": "note about cyber security note about cyber security note about cyber security note about cyber security",
     "tasks": [
       {
         "id": 0,
         "productName": "rubber tire",
         "quantity": 10,
         "customer": "abo abdo",
-        "startingDate": "",
-        "finishingDate": "",
+        "startingDate": "13/3/2025",
+        "finishingDate": "13/5/2025",
         "state": "",
         "progress": 20.5
       }
