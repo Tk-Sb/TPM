@@ -27,13 +27,16 @@ public class AdminDashboardPage extends JFrame {
     DataTable tasksTable = new DataTable(tasksTableColumnNames);
 
     // Buttons
-    PrimaryButton addProductionLine = new PrimaryButton("Add new production line",
+    PrimaryButton addProductionLine = new PrimaryButton("Add new",
     e -> openAddDialog()
     );
-    SecondaryButton editProductionLine = new SecondaryButton("Edit production line",
+    SecondaryButton deleteProductionLine = new SecondaryButton("Delete",
+    e -> openDeleteDialog()
+    );
+    SecondaryButton editProductionLine = new SecondaryButton("Edit",
     e -> openEditDialog()
     );
-    SecondaryButton checkProductionLineInfo = new SecondaryButton("Check production line info",
+    SecondaryButton checkProductionLineInfo = new SecondaryButton("Check info",
     e -> openInfoDialog()
     );
 
@@ -46,23 +49,23 @@ public class AdminDashboardPage extends JFrame {
     private void initializeFrame() {
         setTitle("TPM Admin Page");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLayout(new BorderLayout());
+        setLayout(new BorderLayout()); // Border layout manager
         setSize(1200, 900);
-        getContentPane().setBackground(new Color(9, 9, 11));
+        getContentPane().setBackground(new Color(9, 9, 11)); // change background color
 
         // Table panel
-        mainPanel.setLayout(new BorderLayout(16, 16));
-        mainPanel.setBackground(new Color(9, 9, 11));
-        mainPanel.setBorder(new EmptyBorder(100, 48, 100, 48));
+        mainPanel.setLayout(new BorderLayout(16, 16)); // Border layout manager
+        mainPanel.setBackground(new Color(9, 9, 11)); // change background color
+        mainPanel.setBorder(new EmptyBorder(100, 48, 100, 48)); // Padding
         mainPanel.add(subPanel, BorderLayout.NORTH);
         mainPanel.add(productionLinesTable, BorderLayout.CENTER);
 
-
         // Buttons panel
-        subPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
-        subPanel.setBackground(new Color(9, 9, 11));
+        subPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); // Flow layout manager
+        subPanel.setBackground(new Color(9, 9, 11)); // change background color
         subPanel.add(editProductionLine);
         subPanel.add(checkProductionLineInfo);
+        subPanel.add(deleteProductionLine);
         subPanel.add(addProductionLine);
 
         add(mainPanel, BorderLayout.CENTER);
@@ -83,7 +86,15 @@ public class AdminDashboardPage extends JFrame {
         tasksTable.clearData(); // clear table state
 
         for (ProductionLine.Task task : tasks) {
-            Object[] taskData = {task.id, task.productName, task.quantity, task.customer, task.startingDate + " to " + task.finishingDate, task.state, task.progress};
+            Object[] taskData = {
+                task.id, task.productName,
+                task.quantity,
+                task.customer,
+                task.startingDate + " to " + task.finishingDate,
+                task.state,
+                task.progress
+            };
+
             tasksTable.addRow(taskData);
         }
     }
@@ -105,31 +116,83 @@ public class AdminDashboardPage extends JFrame {
         TextInputField notes = new TextInputField("Notes", "notes about the production line");
 
         PrimaryButton saveButton = new PrimaryButton("Save", e -> {
-            dialog.hide(); // close dialog
-            // save form data
-            ProductionLine newProductionLine = new ProductionLine(inventory.productionLineMaxId + 1, name.getText(), state.getSelectedValue(), notes.getText());
+            if (!name.getText().isEmpty()) {
+                dialog.hide(); // close dialog
 
-            try {
-                inventory.addProductionLine(newProductionLine);
-            } catch (JSONException exception) {
-                System.out.println(exception.getMessage());
+                // save form data
+                ProductionLine newProductionLine = new ProductionLine(
+                    inventory.productionLineMaxId + 1,
+                    name.getText(),
+                    state.getSelectedValue(),
+                    notes.getText()
+                );
+
+                try {
+                    inventory.addProductionLine(newProductionLine);
+                } catch (JSONException exception) {
+                    System.out.println(exception.getMessage());
+                }
+
+                fillProductionLinesTable();
             }
-
-            fillProductionLinesTable();
         });
 
-        Card card = new Card();
+        Card card = new Card("Adding new production line", "Please fill the form with the required data");
         card.addContent(name);
         card.addContent(notes);
         card.addContent(state);
 
         // Show dialog with form to add new production line
-        dialog.setTitle("Adding new production line");
         dialog.setSize(720, 720);
         dialog.addContent(card);
         dialog.addFooterButton(dialogCloseButton);
         dialog.addFooterButton(saveButton);
         dialog.show(this);
+    }
+
+    private void openDeleteDialog() {
+        Dialog dialog = new Dialog();
+
+        SecondaryButton dialogCloseButton = new SecondaryButton("Close", e -> {
+            dialog.hide(); // close dialog
+        });
+
+        try {
+            int selectedProductionLineId = (int) productionLinesTable.getSelectedRowData()[0];  // selected row id
+            ProductionLine selectedProductionLine = inventory.findProductionLineById(selectedProductionLineId);
+
+
+            PrimaryButton confirmDelete = new PrimaryButton("Confirm delete", 144, 20, e -> {
+                dialog.hide(); // close dialog
+
+                try {
+                    inventory.removeProductionLine(selectedProductionLine);
+                } catch (JSONException exception) {
+                    System.out.println(exception.getMessage());
+                }
+
+                fillProductionLinesTable();
+            });
+
+            SecondaryButton cancelDelete = new SecondaryButton("Cancel delete", 147, 20, e -> {
+                dialog.hide(); // close dialog
+            });
+
+            Card card = new Card("Confirm deleting: " + selectedProductionLine.name, "Deleted data will be lost permanently!");
+            card.addContent(cancelDelete);
+            card.addContent(confirmDelete);
+
+            // Show dialog to confirm delete
+            dialog.setSize(480, 360);
+            dialog.addContent(card);
+            dialog.show(this);
+        } catch (NullPointerException exception) {
+            // Show error dialog
+            dialog.setTitle("Error, Please select a production line first");
+            dialog.setSize(520, 160);
+            dialog.addFooterButton(dialogCloseButton);
+            dialog.show(this);
+        }
     }
 
     private void openEditDialog() {
@@ -155,28 +218,29 @@ public class AdminDashboardPage extends JFrame {
             notes.setText(selectedProductionLine.notes);
 
             PrimaryButton saveButton = new PrimaryButton("Save", e -> {
-                dialog.hide(); // close dialog
-                // save form data
-                selectedProductionLine.name = name.getText();
-                selectedProductionLine.notes = notes.getText();
-                selectedProductionLine.state = state.getSelectedValue();
+                if (!name.getText().isEmpty()) {
+                    dialog.hide(); // close dialog
+                    // save form data
+                    selectedProductionLine.name = name.getText();
+                    selectedProductionLine.notes = notes.getText();
+                    selectedProductionLine.state = state.getSelectedValue();
 
-                try {
-                    inventory.saveProductionLines();
-                } catch (JSONException exception) {
-                    System.out.println(exception.getMessage());
+                    try {
+                        inventory.saveProductionLines();
+                    } catch (JSONException exception) {
+                        System.out.println(exception.getMessage());
+                    }
+
+                    fillProductionLinesTable();
                 }
-
-                fillProductionLinesTable();
             });
 
-            Card card = new Card();
+            Card card = new Card("Editing " + selectedProductionLine.name, "Edit the form data then click save");
             card.addContent(name);
             card.addContent(notes);
             card.addContent(state);
 
             // Show dialog with form filled with selected production line data
-            dialog.setTitle("Editing " + selectedProductionLine.name);
             dialog.setSize(720, 720);
             dialog.addContent(card);
             dialog.addFooterButton(dialogCloseButton);
@@ -194,7 +258,7 @@ public class AdminDashboardPage extends JFrame {
     private void openInfoDialog() {
         Dialog dialog = new Dialog();
 
-        PrimaryButton dialogCloseButton = new PrimaryButton("Close", e -> {
+        SecondaryButton dialogCloseButton = new SecondaryButton("Close", e -> {
             dialog.hide(); // close dialog
         });
 
@@ -205,7 +269,7 @@ public class AdminDashboardPage extends JFrame {
             fillTasksTable(selectedProductionLine.tasks);
 
             // Show dialog with selected production line tasks
-            dialog.setTitle(selectedProductionLine.name + " information");
+            dialog.setTitle(selectedProductionLine.name + " running tasks");
             dialog.setSize(1400, 360);
             dialog.addContent(tasksTable);
             dialog.addFooterButton(dialogCloseButton);
