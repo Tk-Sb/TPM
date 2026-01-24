@@ -1,36 +1,116 @@
 [
   {
-    "id": 0,
-    "name": "pan",
+    "id": 1,
+    "name": "Industrial Drill",
     "requiredItems": [
-      {
-        "item": "iron",
-        "quantity": 5
-      },
-      {
-        "item": "plastic",
-        "quantity": 5
-      }
+      {"item": "Steel Sheets", "quantity": 5},
+      {"item": "Copper Wire", "quantity": 15},
+      {"item": "Circuit Boards", "quantity": 2},
+      {"item": "Bolts & Nuts", "quantity": 40},
+      {"item": "Electrical Cables", "quantity": 8}
     ]
   },
   {
-    "id": 1,
-    "name": "plastic cup",
+    "id": 2,
+    "name": "Office Chair",
     "requiredItems": [
-      {
-        "item": "plastic",
-        "quantity": 2
-      }
+      {"item": "Steel Sheets", "quantity": 3},
+      {"item": "Plastic Pellets", "quantity": 25},
+      {"item": "Rubber Sheets", "quantity": 2},
+      {"item": "Screws", "quantity": 60},
+      {"item": "Adhesive Glue", "quantity": 1}
     ]
   },
   {
     "id": 3,
-    "name": "rubber tire",
+    "name": "Smartphone",
     "requiredItems": [
-      {
-        "item": "rubber",
-        "quantity": 10
-      }
+      {"item": "Circuit Boards", "quantity": 1},
+      {"item": "Microprocessors", "quantity": 1},
+      {"item": "Glass Panels", "quantity": 2},
+      {"item": "Plastic Pellets", "quantity": 15},
+      {"item": "Lithium Batteries", "quantity": 1},
+      {"item": "Screws", "quantity": 12}
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Wooden Desk",
+    "requiredItems": [
+      {"item": "Wood Planks", "quantity": 8},
+      {"item": "Steel Sheets", "quantity": 2},
+      {"item": "Screws", "quantity": 50},
+      {"item": "Adhesive Glue", "quantity": 2},
+      {"item": "Paint Cans", "quantity": 1}
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Electric Motor",
+    "requiredItems": [
+      {"item": "Copper Wire", "quantity": 45},
+      {"item": "Steel Sheets", "quantity": 4},
+      {"item": "Aluminum Bars", "quantity": 3},
+      {"item": "Rare Earth Magnets", "quantity": 6},
+      {"item": "Bolts & Nuts", "quantity": 20}
+    ]
+  },
+  {
+    "id": 6,
+    "name": "LED TV",
+    "requiredItems": [
+      {"item": "Glass Panels", "quantity": 3},
+      {"item": "Circuit Boards", "quantity": 3},
+      {"item": "Plastic Pellets", "quantity": 20},
+      {"item": "Electrical Cables", "quantity": 12},
+      {"item": "Screws", "quantity": 35},
+      {"item": "Packaging Boxes", "quantity": 1}
+    ]
+  },
+  {
+    "id": 7,
+    "name": "Portable Speaker",
+    "requiredItems": [
+      {"item": "Plastic Pellets", "quantity": 18},
+      {"item": "Circuit Boards", "quantity": 1},
+      {"item": "Rubber Sheets", "quantity": 3},
+      {"item": "Electrical Cables", "quantity": 5},
+      {"item": "Lithium Batteries", "quantity": 1},
+      {"item": "Screws", "quantity": 25}
+    ]
+  },
+  {
+    "id": 8,
+    "name": "Bicycle",
+    "requiredItems": [
+      {"item": "Aluminum Bars", "quantity": 12},
+      {"item": "Steel Sheets", "quantity": 8},
+      {"item": "Rubber Sheets", "quantity": 4},
+      {"item": "Bolts & Nuts", "quantity": 65},
+      {"item": "Paint Cans", "quantity": 2}
+    ]
+  },
+  {
+    "id": 9,
+    "name": "Tablet Computer",
+    "requiredItems": [
+      {"item": "Glass Panels", "quantity": 2},
+      {"item": "Circuit Boards", "quantity": 2},
+      {"item": "Microprocessors", "quantity": 1},
+      {"item": "Plastic Pellets", "quantity": 12},
+      {"item": "Lithium Batteries", "quantity": 1},
+      {"item": "Screws", "quantity": 18}
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Industrial Fan",
+    "requiredItems": [
+      {"item": "Plastic Pellets", "quantity": 30},
+      {"item": "Copper Wire", "quantity": 25},
+      {"item": "Steel Sheets", "quantity": 3},
+      {"item": "Electrical Cables", "quantity": 10},
+      {"item": "Screws", "quantity": 45}
     ]
   }
 ]

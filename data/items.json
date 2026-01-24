@@ -1,18 +1,122 @@
 [
   {
-    "id": 0,
-    "name": "iron",
-    "category": "material",
-    "price": 20.5,
-    "stock": 10,
-    "minimumStock": 5
+    "id": 1,
+    "name": "Steel Sheets",
+    "category": "Metals",
+    "price": 45.75,
+    "stock": 1250,
+    "minimumStock": 200
   },
   {
-    "id": 1,
-    "name": "plastic",
-    "category": "material",
-    "price": 10.4,
-    "stock": 10,
-    "minimumStock": 5
+    "id": 2,
+    "name": "Copper Wire",
+    "category": "Metals",
+    "price": 8.20,
+    "stock": 8500,
+    "minimumStock": 1000
+  },
+  {
+    "id": 3,
+    "name": "Plastic Pellets",
+    "category": "Polymers",
+    "price": 2.15,
+    "stock": 22000,
+    "minimumStock": 3000
+  },
+  {
+    "id": 4,
+    "name": "Aluminum Bars",
+    "category": "Metals",
+    "price": 32.40,
+    "stock": 950,
+    "minimumStock": 150
+  },
+  {
+    "id": 5,
+    "name": "Circuit Boards",
+    "category": "Electronics",
+    "price": 18.90,
+    "stock": 3200,
+    "minimumStock": 500
+  },
+  {
+    "id": 6,
+    "name": "Wood Planks",
+    "category": "Natural Materials",
+    "price": 12.75,
+    "stock": 4800,
+    "minimumStock": 800
+  },
+  {
+    "id": 7,
+    "name": "Rubber Sheets",
+    "category": "Polymers",
+    "price": 6.30,
+    "stock": 6500,
+    "minimumStock": 1200
+  },
+  {
+    "id": 8,
+    "name": "Glass Panels",
+    "category": "Natural Materials",
+    "price": 25.60,
+    "stock": 1800,
+    "minimumStock": 300
+  },
+  {
+    "id": 9,
+    "name": "Microprocessors",
+    "category": "Electronics",
+    "price": 42.80,
+    "stock": 1200,
+    "minimumStock": 200
+  },
+  {
+    "id": 10,
+    "name": "Paint Cans",
+    "category": "Chemicals",
+    "price": 15.25,
+    "stock": 3500,
+    "minimumStock": 600
+  },
+  {
+    "id": 11,
+    "name": "Bolts & Nuts",
+    "category": "Fasteners",
+    "price": 0.85,
+    "stock": 15000,
+    "minimumStock": 2500
+  },
+  {
+    "id": 12,
+    "name": "Screws",
+    "category": "Fasteners",
+    "price": 0.45,
+    "stock": 28000,
+    "minimumStock": 4000
+  },
+  {
+    "id": 13,
+    "name": "Electrical Cables",
+    "category": "Electronics",
+    "price": 3.75,
+    "stock": 9200,
+    "minimumStock": 1500
+  },
+  {
+    "id": 14,
+    "name": "Adhesive Glue",
+    "category": "Chemicals",
+    "price": 7.40,
+    "stock": 4200,
+    "minimumStock": 700
+  },
+  {
+    "id": 15,
+    "name": "Packaging Boxes",
+    "category": "Packaging",
+    "price": 4.20,
+    "stock": 11000,
+    "minimumStock": 2000
   }
 ]

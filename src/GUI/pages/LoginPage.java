@@ -32,7 +32,12 @@ public class LoginPage extends JFrame {
             if (!username.getText().isEmpty() && !password.getText().isEmpty()) {
                 if (username.getText().equals("admin@gmail.com") && password.getText().equals("admin123")) {
                     dispose();
-                } else {
+                    new AdminDashboardPage();
+                } else if (username.getText().equals("manager@gmail.com") && password.getText().equals("manager123")) {
+                    dispose();
+                    new ManagerDashboardPage();
+                }
+                else {
                     username.setHelperText("Username not found");
                     password.setHelperText("Password is incorrect");
                 }

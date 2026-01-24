@@ -1,6 +1,7 @@
 package GUI;
 
 import GUI.pages.AdminDashboardPage;
+import GUI.pages.LoginPage;
 import GUI.pages.ManagerDashboardPage;
 import classes.Inventory;
 import mapper.JSONException;
@@ -21,8 +22,6 @@ public class GUI {
         RunTask runTask = new RunTask();
         runTask.start();
 
-        new ManagerDashboardPage();
-//        new AdminDashboardPage();
-//        new LoginPage();
+        new LoginPage();
     }
 }
