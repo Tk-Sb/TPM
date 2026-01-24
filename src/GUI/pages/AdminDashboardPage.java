@@ -16,7 +16,7 @@ import static GUI.GUI.inventory;
 public class AdminDashboardPage extends JFrame {
     // Panels
     JPanel mainPanel = new JPanel();
-    JPanel subPanel = new JPanel();
+    JPanel actionButtonsPanel = new JPanel();
 
     // Production lines table
     String[] productionLinesTableColumnNames = {"Id", "Name", "State", "Notes"};
@@ -57,16 +57,16 @@ public class AdminDashboardPage extends JFrame {
         mainPanel.setLayout(new BorderLayout(16, 16)); // Border layout manager
         mainPanel.setBackground(new Color(9, 9, 11)); // change background color
         mainPanel.setBorder(new EmptyBorder(100, 48, 100, 48)); // Padding
-        mainPanel.add(subPanel, BorderLayout.NORTH);
+        mainPanel.add(actionButtonsPanel, BorderLayout.NORTH);
         mainPanel.add(productionLinesTable, BorderLayout.CENTER);
 
         // Buttons panel
-        subPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); // Flow layout manager
-        subPanel.setBackground(new Color(9, 9, 11)); // change background color
-        subPanel.add(editProductionLine);
-        subPanel.add(checkProductionLineInfo);
-        subPanel.add(deleteProductionLine);
-        subPanel.add(addProductionLine);
+        actionButtonsPanel.setLayout(new FlowLayout(FlowLayout.RIGHT)); // Flow layout manager
+        actionButtonsPanel.setBackground(new Color(9, 9, 11)); // change background color
+        actionButtonsPanel.add(editProductionLine);
+        actionButtonsPanel.add(checkProductionLineInfo);
+        actionButtonsPanel.add(deleteProductionLine);
+        actionButtonsPanel.add(addProductionLine);
 
         add(mainPanel, BorderLayout.CENTER);
     }
@@ -102,7 +102,7 @@ public class AdminDashboardPage extends JFrame {
     private void openAddDialog() {
         Dialog dialog = new Dialog();
 
-        SecondaryButton dialogCloseButton = new SecondaryButton("Close", e -> {
+        SecondaryButton dialogCloseButton = new SecondaryButton("Cancel", e -> {
             dialog.hide(); // close dialog
         });
 
@@ -153,7 +153,7 @@ public class AdminDashboardPage extends JFrame {
     private void openDeleteDialog() {
         Dialog dialog = new Dialog();
 
-        SecondaryButton dialogCloseButton = new SecondaryButton("Close", e -> {
+        SecondaryButton dialogCloseButton = new SecondaryButton("Cancel", e -> {
             dialog.hide(); // close dialog
         });
 
@@ -198,7 +198,7 @@ public class AdminDashboardPage extends JFrame {
     private void openEditDialog() {
         Dialog dialog = new Dialog();
 
-        SecondaryButton dialogCloseButton = new SecondaryButton("Close", e -> {
+        SecondaryButton dialogCloseButton = new SecondaryButton("Cancel", e -> {
             dialog.hide(); // close dialog
         });
 
@@ -263,7 +263,7 @@ public class AdminDashboardPage extends JFrame {
         });
 
         try {
-            int selectedProductionLineId = (int) productionLinesTable.getSelectedRowData()[0];  // selected row id
+            int selectedProductionLineId = (int) productionLinesTable.getSelectedRowData()[0]; // selected row id
             ProductionLine selectedProductionLine = inventory.findProductionLineById(selectedProductionLineId);
 
             fillTasksTable(selectedProductionLine.tasks);

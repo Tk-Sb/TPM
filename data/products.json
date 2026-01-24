@@ -22,5 +22,15 @@
         "quantity": 2
       }
     ]
+  },
+  {
+    "id": 3,
+    "name": "rubber tire",
+    "requiredItems": [
+      {
+        "item": "rubber",
+        "quantity": 10
+      }
+    ]
   }
 ]

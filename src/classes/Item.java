@@ -22,4 +22,14 @@ public class Item {
     public int getId () {
         return id;
     }
+
+    public String getAvailability () {
+        if (stock == 0) {
+            return "out of stock";
+        } else if (stock <= minimumStock) {
+            return "under minimum stock";
+        } else {
+            return "available";
+        }
+    }
 }

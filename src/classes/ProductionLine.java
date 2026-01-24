@@ -37,18 +37,15 @@ public class ProductionLine {
 
         public  Task(){}
 
-        public Task (String productName, int quantity, String customer, String startingDate, String finishingDate, boolean canProduce) {
-            this.id = 0;
+        public Task (int id, String productName, int quantity, String customer, String startingDate, String finishingDate, String state, double progress) {
+            this.id = id;
             this.productName = productName;
             this.quantity = quantity;
             this.customer = customer;
             this.startingDate = startingDate;
             this.finishingDate = finishingDate;
-            if (canProduce) {
-                this.state = "ongoing";
-            } else {
-                this.state = "not enough items to start task";
-            }
+            this.state = state;
+            this.progress = progress;
         }
     }
 

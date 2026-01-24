@@ -22,6 +22,7 @@ public class Inventory {
     public int itemMaxId;
     public int productMaxId;
     public int productionLineMaxId;
+    public int taskMaxId;
 
     // ================ CONSTRUCTOR ================
     public Inventory(String itemsFilePath, String productsFilePath, String productLineFilePath) {
@@ -66,6 +67,7 @@ public class Inventory {
     // ------------ CRUD OPERATIONS ------------
     public void addItem(Item item) throws JSONException {
         items.add(item);
+        itemMaxId = findItemsMaxId();
         saveItems();
         System.out.println("Item added: " + item.name);
         printItems();
@@ -265,6 +267,7 @@ public class Inventory {
             productionLines = mapper.readValueAsList(file, ProductionLine.class);
             System.out.println("Loaded " + productionLines.size() + " production lines from: " + productLineFilePath);
             productionLineMaxId = findProductionLinesMaxId();
+            taskMaxId = findTaskMaxId();
         } else {
             System.out.println("Production lines file not found: " + productLineFilePath + ". Starting with empty inventory.");
             productionLines = new ArrayList<>();
@@ -289,6 +292,16 @@ public class Inventory {
             saveProductionLines();
             System.out.println("Production line removed: " + productionLine.name);
             printProductionLines();
+        }
+    }
+
+    public void removeTask(ProductionLine.Task task) throws JSONException {
+        for (ProductionLine pl : productionLines) {
+            if (pl.tasks.remove(task)) {
+                saveProductionLines();
+                System.out.println("Production line removed: " + task.productName);
+                printProductionLines();
+            }
         }
     }
 
@@ -318,6 +331,28 @@ public class Inventory {
         for (ProductionLine line : productionLines) {
             if (line.name != null && line.name.equalsIgnoreCase(name)) {
                 return line;
+            }
+        }
+        return null;
+    }
+
+    public ProductionLine.Task findTaskByName(String name) {
+        for (ProductionLine pl : productionLines) {
+            for (ProductionLine.Task task : pl.tasks) {
+                if (task.productName != null && task.productName.equalsIgnoreCase(name)) {
+                    return task;
+                }
+            }
+        }
+        return null;
+    }
+
+    public ProductionLine.Task findTaskById(int id) {
+        for (ProductionLine pl : productionLines) {
+            for (ProductionLine.Task task : pl.tasks) {
+                if (task.id == id) {
+                    return task;
+                }
             }
         }
         return null;
@@ -356,6 +391,18 @@ public class Inventory {
                 .mapToInt(line -> line.id)
                 .max()
                 .orElse(0);
+    }
+
+    private int findTaskMaxId() {
+        int maxId = 0;
+        for (ProductionLine pl : productionLines) {
+            maxId = pl.tasks.stream()
+                    .mapToInt(task -> task.id)
+                    .max()
+                    .orElse(0);
+        }
+
+        return maxId;
     }
 
     // ------------ TASK MANAGEMENT ------------

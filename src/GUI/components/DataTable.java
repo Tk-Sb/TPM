@@ -31,9 +31,8 @@ public class DataTable extends JPanel {
 
     // Without initial data
     public DataTable(String[] columnNames) {
-        Object[][] data = {};
         initializeTable();
-        setData(columnNames, data);
+        setData(columnNames);
     }
 
     private void initializeTable() {
@@ -184,6 +183,12 @@ public class DataTable extends JPanel {
 
     // Set data for the table
     public void setData(String[] columnNames, Object[][] data) {
+        tableModel.setDataVector(data, columnNames);
+        configureTableAppearance();
+    }
+
+    public void setData(String[] columnNames) {
+        Object[][] data = {};
         tableModel.setDataVector(data, columnNames);
         configureTableAppearance();
     }
