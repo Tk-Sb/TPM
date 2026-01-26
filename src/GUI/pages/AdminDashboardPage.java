@@ -270,7 +270,7 @@ public class AdminDashboardPage extends JFrame {
 
             // Show dialog with selected production line tasks
             dialog.setTitle(selectedProductionLine.name + " running tasks");
-            dialog.setSize(1400, 360);
+            dialog.setSize(1400, 720);
             dialog.addContent(tasksTable);
             dialog.addFooterButton(dialogCloseButton);
             dialog.show(this);

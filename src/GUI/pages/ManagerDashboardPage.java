@@ -512,12 +512,16 @@ public class ManagerDashboardPage extends JFrame {
                                 ProductionLine selectedProductionLine = inventory.findProductionLineByName(productionLineName.getText());
 
                                 try {
-                                    inventory.addTaskToProductionLine(selectedProductionLine.id, newTask);
+                                    if (inventory.canProduce(newTask.productName, newTask.quantity)) {
+                                        inventory.addTaskToProductionLine(selectedProductionLine.id, newTask);
+                                        dialog.hide(); // close dialog
+                                    } else {
+                                        quantity.setError(true, "No enough items to start production");
+                                    }
                                 } catch (JSONException exception) {
                                     System.out.println(exception.getMessage());
                                 }
 
-                                dialog.hide(); // close dialog
                             } catch (NullPointerException ex) {
                                 productionLineName.setError(true, "Couldn't find production line");
                             }
@@ -764,6 +768,12 @@ public class ManagerDashboardPage extends JFrame {
                             selectedTask.startingDate = startDate.getText();
                             selectedTask.finishingDate = finishDate.getText();
                             selectedTask.state = state.getSelectedValue();
+
+                            try {
+                                inventory.saveProductionLines();
+                            } catch (JSONException ex) {
+                                throw new RuntimeException(ex);
+                            }
 
                             fillTasksTable();
                         }
